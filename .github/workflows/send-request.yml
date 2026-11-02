@@ -1,20 +1,16 @@
+
 name: Send Request Every 5 Minutes
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '2-59/5 * * * *'
   workflow_dispatch:
 
 jobs:
   send-request:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Send HTTP Request
+      - name: Send Request
         run: |
-          curl -X GET \
-            --max-time 30 \
-            --fail \
-            --silent \
-            --show-error \
-            "https://ecb7-156-203-213-80.ngrok-free.app/SPACE-WEB/database/recive/"
+          curl -L --max-time 30 --fail \
+          "https://ecb7-156-203-213-80.ngrok-free.app/SPACE-WEB/database/recive/"
