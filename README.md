@@ -10,3 +10,6 @@ This repository contains a GitHub Actions workflow that runs every single hour, 
 1. Push this repository to GitHub.
 2. Go to Settings > Actions > General > Workflow permissions and select **Read and write permissions**.
 3. The workflow will commit an update every hour.
+
+// [Codelazr Edit]: add new file called how.md have some info
+
