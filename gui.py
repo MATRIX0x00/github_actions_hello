@@ -9,63 +9,76 @@ class CppAppGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("GitAI Studio - Enhanced C++ Builder v2.0")
-        self.root.geometry("800x650")
-        self.root.minsize(700, 550)
+        self.root.geometry("800x680")
+        self.root.minsize(700, 560)
+
+        # Theme state: 'light' or 'dark'
+        self.current_theme = "light"
 
         # Style configuration
         self.style = ttk.Style()
         self.style.theme_use("clam")
 
         # Main Frame
-        main_frame = ttk.Frame(root, padding="12 12 12 12")
-        main_frame.pack(fill=tk.BOTH, expand=True)
+        self.main_frame = ttk.Frame(root, padding="12 12 12 12")
+        self.main_frame.pack(fill=tk.BOTH, expand=True)
 
-        # Title Label
+        # Top Header Frame (Title + Theme Switch)
+        header_frame = ttk.Frame(self.main_frame)
+        header_frame.pack(fill=tk.X, pady=(0, 10))
+
         title_label = ttk.Label(
-            main_frame,
+            header_frame,
             text="Enhanced C++ Project Build, Test & Management Suite",
-            font=("Helvetica", 16, "bold"),
+            font=("Helvetica", 14, "bold"),
         )
-        title_label.pack(pady=(0, 10))
+        title_label.pack(side=tk.LEFT, anchor=tk.W)
+
+        self.theme_btn = ttk.Button(
+            header_frame,
+            text="Switch to Dark Theme",
+            command=self.toggle_theme,
+        )
+        self.theme_btn.pack(side=tk.RIGHT, anchor=tk.E)
 
         # Buttons Frame
-        btn_frame = ttk.LabelFrame(main_frame, text=" Actions ", padding=10)
-        btn_frame.pack(fill=tk.X, pady=(0, 10))
+        self.btn_frame = ttk.LabelFrame(self.main_frame, text=" Actions ", padding=10)
+        self.btn_frame.pack(fill=tk.X, pady=(0, 10))
 
         self.btn_configure = ttk.Button(
-            btn_frame,
+            self.btn_frame,
             text="1. Configure CMake",
             command=self.run_configure,
         )
         self.btn_configure.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
 
         self.btn_build = ttk.Button(
-            btn_frame,
+            self.btn_frame,
             text="2. Build Project",
             command=self.run_build,
         )
         self.btn_build.grid(row=0, column=1, padx=5, pady=5, sticky="ew")
 
         self.btn_test = ttk.Button(
-            btn_frame,
+            self.btn_frame,
             text="3. Run Tests",
             command=self.run_tests,
         )
         self.btn_test.grid(row=0, column=2, padx=5, pady=5, sticky="ew")
 
         self.btn_run = ttk.Button(
-            btn_frame,
+            self.btn_frame,
             text="4. Run Executable",
             command=self.run_executable,
         )
         self.btn_run.grid(row=0, column=3, padx=5, pady=5, sticky="ew")
 
         for i in range(4):
-            btn_frame.columnconfigure(i, weight=1)
+            self.btn_frame.columnconfigure(i, weight=1)
 
         # Output Console Frame
         console_frame = ttk.LabelFrame(
-            main_frame, text=" Build Log / Output Console ", padding=10
+            self.main_frame, text=" Build Log / Output Console ", padding=10
         )
         console_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
 
@@ -76,21 +89,54 @@ class CppAppGUI:
         self.console.config(state=tk.DISABLED)
 
         # Status Bar & Clear Button Frame
-        bottom_frame = ttk.Frame(main_frame)
+        bottom_frame = ttk.Frame(self.main_frame)
         bottom_frame.pack(fill=tk.X)
 
         self.status_var = tk.StringVar()
         self.status_var.set("Ready")
-        status_bar = ttk.Label(
+        self.status_bar = ttk.Label(
             bottom_frame,
             textvariable=self.status_var,
             relief=tk.SUNKEN,
             anchor=tk.W,
         )
-        status_bar.pack(side=tk.LEFT, fill=tk.X, expand=True)
+        self.status_bar.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
         clear_btn = ttk.Button(bottom_frame, text="Clear Console", command=self.clear_console)
         clear_btn.pack(side=tk.RIGHT, padx=(5, 0))
+
+        # Apply initial theme
+        self.apply_theme()
+
+    def toggle_theme(self):
+        if self.current_theme == "light":
+            self.current_theme = "dark"
+            self.theme_btn.config(text="Switch to Light Theme")
+        else:
+            self.current_theme = "light"
+            self.theme_btn.config(text="Switch to Dark Theme")
+        self.apply_theme()
+
+    def apply_theme(self):
+        if self.current_theme == "dark":
+            bg_color = "#1e1e1e"
+            fg_color = "#d4d4d4"
+            console_bg = "#121212"
+            console_fg = "#00ff00"
+            self.root.config(bg=bg_color)
+        else:
+            bg_color = "#f0f0f0"
+            fg_color = "#000000"
+            console_bg = "#ffffff"
+            console_fg = "#000000"
+            self.root.config(bg="#ffffff")
+
+        # Configure ScrolledText console colors
+        self.console.config(
+            bg=console_bg,
+            fg=console_fg,
+            insertbackground=fg_color,
+        )
 
     def log(self, message):
         self.console.config(state=tk.NORMAL)
@@ -109,6 +155,7 @@ class CppAppGUI:
             self.btn_build,
             self.btn_test,
             self.btn_run,
+            self.theme_btn,
         ]:
             btn.config(state=state)
 
