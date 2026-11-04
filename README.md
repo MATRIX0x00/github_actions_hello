@@ -13,3 +13,7 @@ This repository contains a GitHub Actions workflow that runs every single hour, 
 
 // [Codelazr Edit]: add new file called how.md have some info
 
+
+
+// [Codelazr Edit]: i need full c++ calca app
+
