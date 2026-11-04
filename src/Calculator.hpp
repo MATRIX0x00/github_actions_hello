@@ -11,6 +11,10 @@ public:
     double divide(double a, double b) const;
     double power(double base, double exponent) const;
     double squareRoot(double value) const;
+    double modulo(double a, double b) const;
+    double percentage(double value, double percent) const;
+    double absolute(double value) const;
+    unsigned long long factorial(int n) const;
 };
 
 #endif // CALCULATOR_HPP

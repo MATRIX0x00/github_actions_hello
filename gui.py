@@ -8,9 +8,9 @@ from tkinter import messagebox, scrolledtext, ttk
 class CppAppGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("GitAI Studio - Enhanced C++ Builder")
-        self.root.geometry("750x600")
-        self.root.minsize(650, 500)
+        self.root.title("GitAI Studio - Enhanced C++ Builder v2.0")
+        self.root.geometry("800x650")
+        self.root.minsize(700, 550)
 
         # Style configuration
         self.style = ttk.Style()
@@ -23,7 +23,7 @@ class CppAppGUI:
         # Title Label
         title_label = ttk.Label(
             main_frame,
-            text="Enhanced C++ Project Build & Test Suite",
+            text="Enhanced C++ Project Build, Test & Management Suite",
             font=("Helvetica", 16, "bold"),
         )
         title_label.pack(pady=(0, 10))

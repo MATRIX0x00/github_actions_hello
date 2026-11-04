@@ -53,13 +53,39 @@ void test_advanced() {
     std::cout << "test_advanced passed!" << std::endl;
 }
 
+void test_extra_features() {
+    Calculator calc;
+    assert(calc.modulo(9.0, 4.0) == 1.0);
+    assert(calc.percentage(200.0, 15.0) == 30.0);
+    assert(calc.absolute(-42.5) == 42.5);
+    assert(calc.factorial(5) == 120);
+
+    bool exceptionThrown = false;
+    try {
+        calc.modulo(5.0, 0.0);
+    } catch (const std::invalid_argument&) {
+        exceptionThrown = true;
+    }
+    assert(exceptionThrown);
+
+    exceptionThrown = false;
+    try {
+        calc.factorial(-1);
+    } catch (const std::invalid_argument&) {
+        exceptionThrown = true;
+    }
+    assert(exceptionThrown);
+    std::cout << "test_extra_features passed!" << std::endl;
+}
+
 int main() {
-    std::cout << "Running Enhanced Calculator Unit Tests..." << std::endl;
+    std::cout << "Running Enhanced Calculator Unit Tests v2.0..." << std::endl;
     test_add();
     test_subtract();
     test_multiply();
     test_divide();
     test_advanced();
+    test_extra_features();
     std::cout << "All tests passed successfully!" << std::endl;
     return 0;
 }
