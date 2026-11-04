@@ -59,3 +59,33 @@ unsigned long long Calculator::factorial(int n) const {
     }
     return result;
 }
+
+double Calculator::sin(double radians) const {
+    return std::sin(radians);
+}
+
+double Calculator::cos(double radians) const {
+    return std::cos(radians);
+}
+
+double Calculator::tan(double radians) const {
+    return std::tan(radians);
+}
+
+double Calculator::log(double value) const {
+    if (value <= 0.0) {
+        throw std::invalid_argument("Logarithm of zero or negative number is not allowed.");
+    }
+    return std::log(value);
+}
+
+double Calculator::log10(double value) const {
+    if (value <= 0.0) {
+        throw std::invalid_argument("Logarithm base 10 of zero or negative number is not allowed.");
+    }
+    return std::log10(value);
+}
+
+double Calculator::exp(double value) const {
+    return std::exp(value);
+}

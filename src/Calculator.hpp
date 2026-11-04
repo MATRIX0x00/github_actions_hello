@@ -15,6 +15,14 @@ public:
     double percentage(double value, double percent) const;
     double absolute(double value) const;
     unsigned long long factorial(int n) const;
+
+    // Scientific functions
+    double sin(double radians) const;
+    double cos(double radians) const;
+    double tan(double radians) const;
+    double log(double value) const;
+    double log10(double value) const;
+    double exp(double value) const;
 };
 
 #endif // CALCULATOR_HPP

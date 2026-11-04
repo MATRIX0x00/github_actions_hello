@@ -78,14 +78,41 @@ void test_extra_features() {
     std::cout << "test_extra_features passed!" << std::endl;
 }
 
+void test_scientific() {
+    Calculator calc;
+    assert(std::abs(calc.sin(0.0) - 0.0) < 1e-9);
+    assert(std::abs(calc.cos(0.0) - 1.0) < 1e-9);
+    assert(std::abs(calc.log(1.0) - 0.0) < 1e-9);
+    assert(std::abs(calc.log10(100.0) - 2.0) < 1e-9);
+    assert(std::abs(calc.exp(0.0) - 1.0) < 1e-9);
+
+    bool exceptionThrown = false;
+    try {
+        calc.log(0.0);
+    } catch (const std::invalid_argument&) {
+        exceptionThrown = true;
+    }
+    assert(exceptionThrown);
+
+    exceptionThrown = false;
+    try {
+        calc.log10(-5.0);
+    } catch (const std::invalid_argument&) {
+        exceptionThrown = true;
+    }
+    assert(exceptionThrown);
+    std::cout << "test_scientific passed!" << std::endl;
+}
+
 int main() {
-    std::cout << "Running Enhanced Calculator Unit Tests v2.0..." << std::endl;
+    std::cout << "Running Enhanced Calculator Unit Tests v2.1..." << std::endl;
     test_add();
     test_subtract();
     test_multiply();
     test_divide();
     test_advanced();
     test_extra_features();
+    test_scientific();
     std::cout << "All tests passed successfully!" << std::endl;
     return 0;
 }

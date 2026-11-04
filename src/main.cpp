@@ -2,7 +2,7 @@
 #include "Calculator.hpp"
 
 int main() {
-    std::cout << "=== C++ Enhanced Application Starting (v2.0) ===" << std::endl;
+    std::cout << "=== C++ Enhanced Scientific Application Starting (v2.1) ===" << std::endl;
 
     Calculator calc;
     double a = 9.0;
@@ -21,6 +21,13 @@ int main() {
         std::cout << "Percentage (50% of A): " << calc.percentage(a, 50.0) << std::endl;
         std::cout << "Absolute (-15.5): " << calc.absolute(-15.5) << std::endl;
         std::cout << "Factorial (5!): " << calc.factorial(5) << std::endl;
+        
+        // Scientific demonstrations
+        std::cout << "Sine (0.0 rad): " << calc.sin(0.0) << std::endl;
+        std::cout << "Cosine (0.0 rad): " << calc.cos(0.0) << std::endl;
+        std::cout << "Natural Log (e): " << calc.log(2.718281828459045) << std::endl;
+        std::cout << "Log Base 10 (100.0): " << calc.log10(100.0) << std::endl;
+        std::cout << "Exponential (1.0): " << calc.exp(1.0) << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
