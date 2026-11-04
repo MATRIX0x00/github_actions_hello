@@ -1,4 +1,5 @@
 #include "Calculator.hpp"
+#include <cmath>
 
 double Calculator::add(double a, double b) const {
     return a + b;
@@ -17,4 +18,15 @@ double Calculator::divide(double a, double b) const {
         throw std::invalid_argument("Division by zero is not allowed.");
     }
     return a / b;
+}
+
+double Calculator::power(double base, double exponent) const {
+    return std::pow(base, exponent);
+}
+
+double Calculator::squareRoot(double value) const {
+    if (value < 0.0) {
+        throw std::invalid_argument("Square root of negative number is not allowed.");
+    }
+    return std::sqrt(value);
 }

@@ -9,6 +9,8 @@ public:
     double subtract(double a, double b) const;
     double multiply(double a, double b) const;
     double divide(double a, double b) const;
+    double power(double base, double exponent) const;
+    double squareRoot(double value) const;
 };
 
 #endif // CALCULATOR_HPP

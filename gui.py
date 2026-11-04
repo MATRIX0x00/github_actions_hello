@@ -8,22 +8,22 @@ from tkinter import messagebox, scrolledtext, ttk
 class CppAppGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("GitAI Studio - C++ to Executable Builder")
-        self.root.geometry("700x550")
-        self.root.minsize(600, 450)
+        self.root.title("GitAI Studio - Enhanced C++ Builder")
+        self.root.geometry("750x600")
+        self.root.minsize(650, 500)
 
         # Style configuration
         self.style = ttk.Style()
         self.style.theme_use("clam")
 
         # Main Frame
-        main_frame = ttk.Frame(root, padding="10 10 10 10")
+        main_frame = ttk.Frame(root, padding="12 12 12 12")
         main_frame.pack(fill=tk.BOTH, expand=True)
 
         # Title Label
         title_label = ttk.Label(
             main_frame,
-            text="C++ Project Build & Test Tool",
+            text="Enhanced C++ Project Build & Test Suite",
             font=("Helvetica", 16, "bold"),
         )
         title_label.pack(pady=(0, 10))
@@ -65,7 +65,7 @@ class CppAppGUI:
 
         # Output Console Frame
         console_frame = ttk.LabelFrame(
-            main_frame, text=" Build Log / Output ", padding=10
+            main_frame, text=" Build Log / Output Console ", padding=10
         )
         console_frame.pack(fill=tk.BOTH, expand=True, pady=(0, 10))
 
@@ -75,21 +75,32 @@ class CppAppGUI:
         self.console.pack(fill=tk.BOTH, expand=True)
         self.console.config(state=tk.DISABLED)
 
-        # Status Bar
+        # Status Bar & Clear Button Frame
+        bottom_frame = ttk.Frame(main_frame)
+        bottom_frame.pack(fill=tk.X)
+
         self.status_var = tk.StringVar()
         self.status_var.set("Ready")
         status_bar = ttk.Label(
-            main_frame,
+            bottom_frame,
             textvariable=self.status_var,
             relief=tk.SUNKEN,
             anchor=tk.W,
         )
-        status_bar.pack(fill=tk.X)
+        status_bar.pack(side=tk.LEFT, fill=tk.X, expand=True)
+
+        clear_btn = ttk.Button(bottom_frame, text="Clear Console", command=self.clear_console)
+        clear_btn.pack(side=tk.RIGHT, padx=(5, 0))
 
     def log(self, message):
         self.console.config(state=tk.NORMAL)
         self.console.insert(tk.END, message + "\n")
         self.console.see(tk.END)
+        self.console.config(state=tk.DISABLED)
+
+    def clear_console(self):
+        self.console.config(state=tk.NORMAL)
+        self.console.delete("1.0", tk.END)
         self.console.config(state=tk.DISABLED)
 
     def set_buttons_state(self, state):
@@ -170,7 +181,6 @@ class CppAppGUI:
         )
 
     def run_executable(self):
-        # Determine executable path based on platform
         if os.name == "nt":
             exe_candidates = [
                 os.path.join("build", "Release", "app_exec.exe"),

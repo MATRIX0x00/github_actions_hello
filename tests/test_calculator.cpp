@@ -38,12 +38,28 @@ void test_divide() {
     std::cout << "test_divide passed!" << std::endl;
 }
 
+void test_advanced() {
+    Calculator calc;
+    assert(calc.power(2.0, 3.0) == 8.0);
+    assert(calc.squareRoot(16.0) == 4.0);
+
+    bool exceptionThrown = false;
+    try {
+        calc.squareRoot(-4.0);
+    } catch (const std::invalid_argument&) {
+        exceptionThrown = true;
+    }
+    assert(exceptionThrown);
+    std::cout << "test_advanced passed!" << std::endl;
+}
+
 int main() {
-    std::cout << "Running Calculator Unit Tests..." << std::endl;
+    std::cout << "Running Enhanced Calculator Unit Tests..." << std::endl;
     test_add();
     test_subtract();
     test_multiply();
     test_divide();
+    test_advanced();
     std::cout << "All tests passed successfully!" << std::endl;
     return 0;
 }
